@@ -9,7 +9,7 @@ const termLines = [
   { type: 'cmd', text: 'cat role.txt' },
   { type: 'out', text: 'CS @ Purdue, Honors College' },
   { type: 'cmd', text: 'cat focus.txt' },
-  { type: 'out', text: 'ML research · applied ML · systems' },
+  { type: 'out', text: 'ML research · applied ML · quant research' },
   { type: 'cmd', text: 'status' },
   { type: 'out-green', text: '● available for research / internships' },
 ];
