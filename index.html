@@ -129,8 +129,8 @@
           <p class="paper-desc">
             Original research evaluating whether machine learning can mitigate cognitive bias in fantasy football
             projections. Position-specific XGBoost models were trained on ten years of NFL data with over 1,900
-            engineered features, improving ranking accuracy, especially for quarterbacks and tight ends, by
-            reducing narrative-driven bias.
+            engineered features. By mitigating cognitive bias, I was able to improve ordinal rankings, especially
+            for quarterbacks and tight ends, in comparison to ESPN.
           </p>
           <div class="paper-tags">
             <span class="tag">XGBoost</span>
@@ -151,37 +151,16 @@
       <h2 class="section-title">Projects</h2>
 
       <div class="project-list">
-
         <article class="project" data-accent="amber">
           <div class="project-meta">
-            <span class="project-date">2026</span>
-            <span class="project-stack">Python · XGBoost · scikit-learn · Pandas</span>
-          </div>
-          <h3 class="project-title">NFL Expert Bias Mitigation</h3>
-          <p class="project-desc">
-            The functional implementation of my published research: a tool that generates fantasy football
-            rankings from position-specific XGBoost models and compares them directly against ESPN's expert
-            projections to surface undervalued and overvalued players. Includes a full evaluation pipeline that
-            scores both against final season results to see who was actually right.
-          </p>
-          <div class="project-stats">
-            <div class="stat"><span class="stat-val">4 models</span><span class="stat-label">QB, RB, WR, TE</span></div>
-            <div class="stat"><span class="stat-val">2013-2023</span><span class="stat-label">historical dataset</span></div>
-            <div class="stat"><span class="stat-val">1900+</span><span class="stat-label">features utilized</span></div>
-          </div>
-          <a class="project-link" href="https://github.com/vishnudattaj/NFL-Expert-Bias-Mitigation" target="_blank" rel="noopener">view repo ↗</a>
-        </article>
-
-        <article class="project" data-accent="green">
-          <div class="project-meta">
-            <span class="project-date">Apr – May 2026</span>
+            <span class="project-date">Apr – Jun 2026</span>
             <span class="project-stack">Python · Pandas · NumPy</span>
           </div>
           <h3 class="project-title">Volatility-Adjusted Momentum Engine</h3>
           <p class="project-desc">
             A point-in-time backtesting framework for U.S. equities. A dual-filter strategy identifies price
             breakouts via 50/200-day moving average spreads, then normalizes signal strength using Garman-Klass
-            volatility estimators and allocates capital inversely to risk. Built as six pipeline stages, from
+            volatility estimators and allocates capital inversely to risk. Built as seven pipeline stages, from
             raw ticker partitioning through a daily-rebalanced execution simulator with liquidity guardrails.
           </p>
           <div class="project-stats">
@@ -192,14 +171,54 @@
           <a class="project-link" href="https://github.com/vishnudattaj/Volatility-Adjusted-Momentum-Engine" target="_blank" rel="noopener">view repo ↗</a>
         </article>
 
+        <article class="project" data-accent="green">
+          <div class="project-meta">
+            <span class="project-date">Aug 2025 - May 2026</span>
+            <span class="project-stack">Python · XGBoost · scikit-learn · Pandas</span>
+          </div>
+          <h3 class="project-title">NFL Expert Bias Mitigation</h3>
+          <p class="project-desc">
+            The functional implementation of my published research: a tool that generates fantasy football
+            rankings from position-specific XGBoost models and compares them directly against ESPN's expert
+            projections to uncover undervalued and overvalued players. Includes a full evaluation pipeline that
+            scores both projections against final season results to see who was actually right.
+          </p>
+          <div class="project-stats">
+            <div class="stat"><span class="stat-val">4 models</span><span class="stat-label">QB, RB, WR, TE</span></div>
+            <div class="stat"><span class="stat-val">2013-2023</span><span class="stat-label">historical dataset</span></div>
+            <div class="stat"><span class="stat-val">1900+</span><span class="stat-label">features utilized</span></div>
+          </div>
+          <a class="project-link" href="https://github.com/vishnudattaj/NFL-Expert-Bias-Mitigation" target="_blank" rel="noopener">view repo ↗</a>
+        </article>
+        
         <article class="project" data-accent="amber">
+          <div class="project-meta">
+            <span class="project-date">Feb – Apr 2026</span>
+            <span class="project-stack">C</span>
+          </div>
+          <h3 class="project-title">VaultCLI</h3>
+          <p class="project-desc">
+            A command-line password manager written in C from the ground up. Master-password authentication
+            gates a vault encrypted with a masster-password based XOR cipher, stored in custom binary structs via raw
+            file I/O. Includes duplicate detection, strength scoring across length and character variety, and
+            randomized 20-character password generation.
+          </p>
+          <div class="project-stats">
+            <div class="stat"><span class="stat-val">custom</span><span class="stat-label">binary storage format</span></div>
+            <div class="stat"><span class="stat-val">XOR cipher</span><span class="stat-label">built from scratch</span></div>
+            <div class="stat"><span class="stat-val">zero</span><span class="stat-label">external crypto libraries</span></div>
+          </div>
+          <a class="project-link" href="https://github.com/vishnudattaj/VaultCLI" target="_blank" rel="noopener">view repo ↗</a>
+        </article>
+
+        <article class="project" data-accent="green">
           <div class="project-meta">
             <span class="project-date">Oct 2024 – Aug 2025</span>
             <span class="project-stack">Python · Flask · XGBoost · LangChain · NBA API</span>
           </div>
           <h3 class="project-title">The Basketball Oracle</h3>
           <p class="project-desc">
-            A deployed NBA analytics platform with live scores, standings, rosters, and boxscores, plus a
+            An NBA analytics platform with live scores, standings, rosters, and boxscores, plus a
             machine-learning core that predicts player performance for the upcoming season. A toggle switches
             between fast stat lookups and an AI search mode: a LangChain and Ollama RAG pipeline that answers
             natural-language basketball questions over a Wikipedia-derived knowledge base.
@@ -212,7 +231,7 @@
           <a class="project-link" href="https://github.com/vishnudattaj/The-Basketball-Oracle" target="_blank" rel="noopener">view repo ↗</a>
         </article>
 
-        <article class="project" data-accent="green">
+        <article class="project" data-accent="amber">
           <div class="project-meta">
             <span class="project-date">Jun – Aug 2025</span>
             <span class="project-stack">Python · NLTK · WordNet</span>
@@ -232,9 +251,9 @@
           <a class="project-link" href="https://github.com/vishnudattaj/Semantic-Frame-Identifier" target="_blank" rel="noopener">view repo ↗</a>
         </article>
 
-        <article class="project" data-accent="amber">
+        <article class="project" data-accent="green">
           <div class="project-meta">
-            <span class="project-date">2025</span>
+            <span class="project-date">Oct 2024 - Apr 2025</span>
             <span class="project-stack">Flask · Python · JavaScript · XGBoost</span>
           </div>
           <h3 class="project-title">Differential Diagnosis</h3>
@@ -254,27 +273,6 @@
             <a class="project-link" href="https://differential-diagnosis.onrender.com/" target="_blank" rel="noopener">live site ↗</a>
           </div>
         </article>
-
-        <article class="project" data-accent="green">
-          <div class="project-meta">
-            <span class="project-date">Feb – Apr 2026</span>
-            <span class="project-stack">C</span>
-          </div>
-          <h3 class="project-title">VaultCLI</h3>
-          <p class="project-desc">
-            A command-line password manager written in C from the ground up. Master-password authentication
-            gates a vault encrypted with a repeating-key XOR cipher, stored in custom binary structs via raw
-            file I/O. Includes duplicate detection, strength scoring across length and character variety, and
-            randomized 20-character password generation.
-          </p>
-          <div class="project-stats">
-            <div class="stat"><span class="stat-val">custom</span><span class="stat-label">binary storage format</span></div>
-            <div class="stat"><span class="stat-val">XOR cipher</span><span class="stat-label">built from scratch</span></div>
-            <div class="stat"><span class="stat-val">zero</span><span class="stat-label">external crypto libraries</span></div>
-          </div>
-          <a class="project-link" href="https://github.com/vishnudattaj/VaultCLI" target="_blank" rel="noopener">view repo ↗</a>
-        </article>
-
       </div>
     </div>
   </section>
