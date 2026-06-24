@@ -6,12 +6,12 @@ const termBody = document.getElementById('termBody');
 const termLines = [
   { type: 'cmd', text: 'whoami' },
   { type: 'out', text: 'vishnu_datta_jayanti' },
-  { type: 'cmd', text: 'cat role.txt' },
+  { type: 'cmd', text: './fetch_profile.sh' },
   { type: 'out', text: 'CS @ Purdue, Honors College' },
   { type: 'cmd', text: 'cat focus.txt' },
   { type: 'out', text: 'ML research · applied ML · quant backtesting' },
-  { type: 'cmd', text: 'status' },
-  { type: 'out-green', text: '● available for research / internships' },
+  { type: 'cmd', text: 'sys.status()' },
+  { type: 'out-green', text: '[ OK ] available for research / internships' },
 ];
 
 const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -19,13 +19,25 @@ const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').mat
 function buildStaticTerminal() {
   termBody.innerHTML = termLines.map(line => {
     if (line.type === 'cmd') {
-      return `<div><span class="prompt">$</span> <span class="out">${line.text}</span></div>`;
+      return `<div><span class="prompt">ROOT@SYS:~$</span> <span class="out">${line.text}</span></div>`;
     } else if (line.type === 'out-green') {
-      return `<div style="color:var(--green)">${line.text}</div>`;
+      return `<div style="color:var(--neon-green); text-shadow: 0 0 5px var(--green-glow)">${line.text}</div>`;
     } else {
       return `<div class="dim">${line.text}</div>`;
     }
   }).join('');
+}
+
+async function simulateCompilation(element, duration) {
+  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*";
+  const start = Date.now();
+  element.className = 'compile';
+  while (Date.now() - start < duration) {
+    element.textContent = Array.from({length: 15}).map(() => chars[Math.floor(Math.random() * chars.length)]).join('');
+    await sleep(30);
+  }
+  element.textContent = '';
+  element.className = 'out';
 }
 
 async function typeTerminal() {
@@ -38,7 +50,7 @@ async function typeTerminal() {
     if (line.type === 'cmd') {
       const promptSpan = document.createElement('span');
       promptSpan.className = 'prompt';
-      promptSpan.textContent = '$ ';
+      promptSpan.textContent = 'ROOT@SYS:~$';
       row.appendChild(promptSpan);
 
       const textSpan = document.createElement('span');
@@ -47,14 +59,23 @@ async function typeTerminal() {
 
       for (const ch of line.text) {
         textSpan.textContent += ch;
-        await sleep(28);
+        await sleep(35);
       }
-      await sleep(180);
+      await sleep(200);
     } else {
       row.className = line.type === 'out-green' ? '' : 'dim';
-      if (line.type === 'out-green') row.style.color = 'var(--green)';
-      row.textContent = line.text;
-      await sleep(260);
+      if (line.type === 'out-green') {
+        row.style.color = 'var(--neon-green)';
+        row.style.textShadow = '0 0 5px var(--green-glow)';
+      }
+      
+      // Simulate data stream parsing
+      const compileSpan = document.createElement('span');
+      row.appendChild(compileSpan);
+      await simulateCompilation(compileSpan, 1000);
+      
+      compileSpan.textContent = line.text;
+      await sleep(300);
     }
   }
 }
@@ -66,12 +87,8 @@ function sleep(ms) {
 typeTerminal();
 
 // ============================================
-// Scroll reveal
+// Scroll reveal with staging
 // ============================================
-document.querySelectorAll('.log-entry, .project, .paper-card, .stack-col, .contact-inner').forEach(el => {
-  el.classList.add('reveal');
-});
-
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -79,7 +96,7 @@ const observer = new IntersectionObserver((entries) => {
       observer.unobserve(entry.target);
     }
   });
-}, { threshold: 0.12 });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
@@ -87,16 +104,16 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 // Nav background state on scroll
 // ============================================
 const nav = document.getElementById('nav');
-let lastScroll = 0;
 
 window.addEventListener('scroll', () => {
   const y = window.scrollY;
   if (y > 40) {
-    nav.style.boxShadow = '0 1px 0 rgba(127,255,161,0.08)';
+    nav.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.8), 0 1px 0 var(--glass-border)';
+    nav.style.background = 'rgba(3, 6, 10, 0.95)';
   } else {
     nav.style.boxShadow = 'none';
+    nav.style.background = 'rgba(3, 6, 10, 0.85)';
   }
-  lastScroll = y;
 }, { passive: true });
 
 // ============================================
@@ -128,7 +145,6 @@ window.addEventListener('scroll', () => {
     .filter(Boolean);
 
   if (!sections.length) return;
-
   const intersecting = new Set();
 
   const navObserver = new IntersectionObserver((entries) => {
@@ -143,7 +159,6 @@ window.addEventListener('scroll', () => {
     navLinks.forEach(l => l.classList.remove('is-active'));
 
     if (intersecting.size > 0) {
-      // pick whichever tracked section is currently nearest the top
       const activeId = sections.find(sec => intersecting.has(sec.id))?.id;
       const link = navLinks.find(l => l.getAttribute('href') === `#${activeId}`);
       if (link) link.classList.add('is-active');
@@ -154,29 +169,24 @@ window.addEventListener('scroll', () => {
 })();
 
 // ============================================
-// Animated stat counters (numeric stat-vals only)
+// Animated stat counters
 // ============================================
 (function statCounters() {
   const statVals = document.querySelectorAll('.stat-val');
   if (!statVals.length) return;
 
-  // Matches things like "1,900+", "0.71", "52,000+", "4" — captures
-  // an optional leading number with commas/decimals, plus any suffix text.
   const numericPattern = /^([\d,]+(?:\.\d+)?)(.*)$/;
-
   const targets = [];
+  
   statVals.forEach(el => {
     const raw = el.textContent.trim();
-
-    // Skip year-range style values (e.g. "2013-2023", "2012–2024") —
-    // these read as identifiers/ranges, not metrics worth counting up.
     if (/^\d{4}\s?[-–]\s?\d{4}$/.test(raw)) return;
 
     const match = raw.match(numericPattern);
-    if (!match) return; // non-numeric ("XGBoost", "KMeans + XGBoost", etc.) — leave as-is
+    if (!match) return;
 
     const numStr = match[1];
-    const suffix = match[2]; // "+", " R²", "yr", "-2024" style remainder, etc.
+    const suffix = match[2]; 
     const hasComma = numStr.includes(',');
     const decimals = numStr.includes('.') ? numStr.split('.')[1].length : 0;
     const target = parseFloat(numStr.replace(/,/g, ''));
@@ -197,13 +207,12 @@ window.addEventListener('scroll', () => {
 
   function animateCount(item) {
     const { el, target, suffix, hasComma, decimals } = item;
-    const duration = 1100;
+    const duration = 1500;
     const start = performance.now();
 
     function tick(now) {
       const elapsed = now - start;
       const progress = Math.min(elapsed / duration, 1);
-      // ease-out cubic
       const eased = 1 - Math.pow(1 - progress, 3);
       const current = target * eased;
       el.textContent = formatNumber(current, hasComma, decimals) + suffix;
