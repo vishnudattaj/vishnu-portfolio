@@ -157,10 +157,10 @@
 
       <div class="project-grid">
 
-        <article class="glass-panel project reveal" data-accent="amber">
+        <article class="glass-panel project reveal" data-accent="green">
           <div class="module-header">
             <span class="module-id">MOD-00</span>
-            <div class="status-indicator"><span class="pulse amber"></span> AGENT_PIPELINE</div>
+            <div class="status-indicator"><span class="pulse green"></span> AGENT_PIPELINE</div>
           </div>
           <div class="project-content">
             <div class="project-meta">
@@ -170,18 +170,16 @@
             <h3 class="project-title">ChronOllama</h3>
             <p class="project-desc">
               An experimental autonomous software-building agent running entirely on local models served through
-              Ollama. A conversational intake phase clarifies the request, a planner model breaks it into
+              Ollama. A conversational phase clarifies the user's request, a planner model breaks it into
               dependency-aware steps, and worker models generate the corresponding files in parallel where
               possible. Every file passes through a linting retry loop, a testability check, and either automated
               test generation/execution or a fallback model evaluation, with failures triggering retries and, past
-              a threshold, replanning around the failed step. All model I/O is constrained to strict JSON schemas
-              via Pydantic, and the system swaps between detailed and simplified prompt sets depending on the
+              a threshold, replanning around the failed step.The system swaps between detailed and simplified prompt sets depending on the
               parameter size of the local model in use.
             </p>
             <div class="project-stats">
               <div class="stat"><span class="stat-val">6-stage</span><span class="stat-label">plan → generate → lint → test → evaluate → replan loop</span></div>
               <div class="stat"><span class="stat-val">JSON-schema</span><span class="stat-label">constrained model I/O via Pydantic</span></div>
-              <div class="stat"><span class="stat-val">unsuccessful</span><span class="stat-label">small models too weak, large models too costly</span></div>
             </div>
             <a class="project-link" href="https://github.com/vishnudattaj/ChronOllama" target="_blank" rel="noopener">ACCESS REPO ↗</a>
           </div>
